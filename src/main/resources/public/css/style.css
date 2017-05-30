@@ -1,0 +1,12 @@
+.header{
+    width: 1920px;
+    height: 100px;
+    background-image: url("../img/GRADIENT-C-header-web.jpg");
+    font-size: 30px;
+}
+
+.header-text{
+    padding-top: 25px;
+    padding-left: 1em;
+    color: white;
+}
