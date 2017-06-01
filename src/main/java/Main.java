@@ -1,5 +1,6 @@
-import com.codecool.logger.DummyTemperature;
-import com.codecool.logger.TemperatureLogger;
+import com.codecool.logger.temperature.DummyTemperatureLogger;
+import com.codecool.logger.temperature.Temperature;
+import com.codecool.logger.temperature.TemperatureLogger;
 import controller.RenderController;
 import spark.Request;
 import spark.Response;
@@ -16,14 +17,23 @@ public class Main {
         port(9999);
         enableDebugScreen();
 
-        TemperatureLogger dummyTemperature = new DummyTemperature();
+        TemperatureLogger dummyTemperatureLogger = new DummyTemperatureLogger();
 
         get("/", (Request req, Response res) -> {
-            dummyTemperature.getTemp();
-            dummyTemperature.getTemp();
-            dummyTemperature.getTemp();
-            return new ThymeleafTemplateEngine().render(RenderController.renderTemperature(req, res, dummyTemperature.getTemperatures()));
+            return new ThymeleafTemplateEngine().render(RenderController.renderTemperature(req, res, dummyTemperatureLogger.getTemperaturesJson()));
         });
+
+
+        get("/getTemps", (Request req, Response res) -> {
+            dummyTemperatureLogger.getTemp();
+            return dummyTemperatureLogger.getTemperaturesJson();
+        });
+
+        get("/getTemp", (Request req, Response res) -> {
+            Temperature temperature = dummyTemperatureLogger.getTemp();
+            return temperature.toJSON();
+        });
+
 
 
 
