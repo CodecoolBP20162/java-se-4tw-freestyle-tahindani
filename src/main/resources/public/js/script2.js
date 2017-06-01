@@ -12,7 +12,7 @@ $(document).ready(function () {
 
     // this method maximize the length of the array
     Array.prototype.populate = function (item) {
-        if (this.length > 10) {
+        if (this.length > 9) {
             this.push(item);
             this.shift();
         } else {
@@ -20,9 +20,8 @@ $(document).ready(function () {
         }
     };
 
-    $('#getTemp').click(function () {
-        $.ajax({
-            url: "/getTemps", success: function (result) {
+    function main() {
+        $.ajax({url: "/getTemps", success: function (result) {
                 processResultList(result);
 
                 var myChart = Highcharts.chart('cartContainer', {
@@ -59,6 +58,9 @@ $(document).ready(function () {
                 });
             }
         });
-    });
+    }
+
+    main();
+    setInterval(main, 5000);
 
 });
