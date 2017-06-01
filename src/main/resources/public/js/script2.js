@@ -57,10 +57,13 @@ $(document).ready(function () {
 
                 });
             }
-        });
+        , error: function (jqXHR, textStatus, errorThrown) {
+            alert("Connection with the server failed");
+            clearInterval(intID)
+        }});
     }
 
     main();
-    setInterval(main, 5000);
+    var intID = setInterval(main, 5000);
 
 });
