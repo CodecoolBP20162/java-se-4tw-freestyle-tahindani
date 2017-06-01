@@ -24,11 +24,6 @@ public class Main {
         });
 
 
-        get("/getTemps", (Request req, Response res) -> {
-            dummyTemperatureLogger.getTemp();
-            return dummyTemperatureLogger.getTemperaturesJson();
-        });
-
         get("/getTemp", (Request req, Response res) -> {
             Temperature temperature = dummyTemperatureLogger.getTemp();
             return temperature.toJSON();
