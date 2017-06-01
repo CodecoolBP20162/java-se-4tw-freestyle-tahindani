@@ -5,10 +5,20 @@ $(document).ready(function () {
 
     function processResultList(resultJson) {
         var temps = JSON.parse(resultJson);
-        tempValueList.push(temps[temps.length - 1].value);
-        tempDateList.push(temps[temps.length - 1].dateString);
+        tempValueList.populate(temps[temps.length - 1].value);
+        tempDateList.populate(temps[temps.length - 1].dateString);
         console.log(tempValueList);
     }
+
+    // this method maximize the length of the array
+    Array.prototype.populate = function (item) {
+        if (this.length > 10) {
+            this.push(item);
+            this.shift();
+        } else {
+            this.push(item);
+        }
+    };
 
     $('#getTemp').click(function () {
         $.ajax({
