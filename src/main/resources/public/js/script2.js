@@ -3,6 +3,13 @@ $(document).ready(function () {
     var tempValueList = [];
     var tempDateList = [];
 
+    /**
+     * This method process the json string which it get from the server. It parse
+     * it into javascript object and add the {@code value} and {@code dateString}
+     * attribute of the last element to the {@code tempValueList} and {@code tempDateList}
+     * respectively.
+     * @param resultJson A list of json objects
+     */
     function processResultList(resultJson) {
         var temps = JSON.parse(resultJson);
         tempValueList.populate(temps[temps.length - 1].value);
@@ -10,7 +17,12 @@ $(document).ready(function () {
         console.log(tempValueList);
     }
 
-    // this method maximize the length of the array
+    /**
+     * This method add a new function to the prototype of the {@code Array}.
+     * It add an item to an {@code Array} but only up to ten elements. After
+     * ten elements it removes the first element before adding a new.
+     * @param item An item to add
+     */
     Array.prototype.populate = function (item) {
         if (this.length > 9) {
             this.push(item);
@@ -20,6 +32,11 @@ $(document).ready(function () {
         }
     };
 
+    /**
+     * This function make an ajax request, get back a list of json-s, process it and pass
+     * it to the cart to display. A setInterval is called on it so it repeat in every 5 seconds
+     * until it get the result from the server.
+     */
     function main() {
         $.ajax({url: "/getTemps", success: function (result) {
                 processResultList(result);

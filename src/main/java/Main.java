@@ -1,5 +1,4 @@
 import com.codecool.logger.temperature.DummyTemperatureLogger;
-import com.codecool.logger.temperature.Temperature;
 import com.codecool.logger.temperature.TemperatureLogger;
 import controller.RenderController;
 import spark.Request;
@@ -9,6 +8,15 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
 
+/**
+ * <h1>Temperature Logger</h1>
+ * A simple Spark based application where data from a sensor
+ * can be shown on a javascript chart.
+ *
+ * @author  TahinDani
+ * @version 1.0
+ * @since   2017-06-01
+ */
 public class Main {
 
     public static void main(String[] args) {
@@ -20,7 +28,7 @@ public class Main {
         TemperatureLogger dummyTemperatureLogger = new DummyTemperatureLogger();
 
         get("/", (Request req, Response res) -> {
-            return new ThymeleafTemplateEngine().render(RenderController.renderTemperature(req, res, dummyTemperatureLogger.getTemperaturesJson()));
+            return new ThymeleafTemplateEngine().render(RenderController.renderTemperature(req, res));
         });
 
 
