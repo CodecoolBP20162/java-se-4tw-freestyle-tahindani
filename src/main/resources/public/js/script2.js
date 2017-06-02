@@ -46,10 +46,10 @@ $(document).ready(function () {
                         type: 'line'
                     },
                     title: {
-                        text: 'Monthly Average Temperature'
+                        text: 'Home temperature'
                     },
                     subtitle: {
-                        text: 'Source: WorldClimate.com'
+                        text: ""
                     },
                     xAxis: {
                         categories: tempDateList
